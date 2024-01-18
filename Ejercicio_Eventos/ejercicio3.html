@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+    <style>
+        body { margin: 0; }
+        #info { width: 200px; border: thin solid silver; padding: 0.5em; position: fixed; background-color: #FFFFFF; }
+        #info h1 { margin: 0; }
+    </style>
+    <script>
+        function tamanoVentanaNavegador() {
+            let ancho = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || 0;
+            let alto = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+            return { ancho: ancho, alto: alto };
+        }
+
+        function muestraInformacion(mensaje) {
+            let infoElement = document.getElementById("info");
+            infoElement.innerHTML = '<h1>' + mensaje[0] + '</h1>';
+            for (let i = 1; i < mensaje.length; i++) {
+                infoElement.innerHTML += '<p>' + mensaje[i] + '</p>';
+            }
+        }
+
+        function determinarZonaClic(event) {
+            let tamanoVentana = tamanoVentanaNavegador();
+            let mitadAncho = tamanoVentana.ancho / 2;
+            let mitadAlto = tamanoVentana.alto / 2;
+            let x = event.clientX;
+            let y = event.clientY;
+
+            let zona = "";
+
+            if (x < mitadAncho) {
+                zona += "izquierda ";
+            } else {
+                zona += "derecha ";
+            }
+
+            if (y < mitadAlto) {
+                zona += "arriba";
+            } else {
+                zona += "abajo";
+            }
+
+            return zona;
+        }
+
+        function clicEnVentana(event) {
+            let zonaClic = determinarZonaClic(event);
+            muestraInformacion(['Zona de clic', zonaClic]);
+            document.getElementById("info").style.backgroundColor = '#FFFFCC';
+        }
+
+        document.addEventListener('click', clicEnVentana);
+    </script>
+</head>
+<body>
+<div id="info"></div>
+</body>
+</html>

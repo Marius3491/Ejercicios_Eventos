@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2</title>
+    <style>
+        #info {width: 200px; border: thin solid silver; padding: 0.5em; position: fixed; background-color: #FFFFFF;}
+        #info h1 {margin: 0;}
+    </style>
+    <script>
+        function muestraInformacion(mensaje) {
+            let infoElement = document.getElementById("info");
+            infoElement.innerHTML = '<h1>' + mensaje[0] + '</h1>';
+            for (let i = 1; i < mensaje.length; i++) {
+                infoElement.innerHTML += '<p>' + mensaje[i] + '</p>';
+            }
+        }
+
+        function mouseHandler(event) {
+            let xRelativa = event.clientX;
+            let yRelativa = event.clientY;
+            let xAbsoluta = event.pageX;
+            let yAbsoluta = event.pageY;
+            muestraInformacion(['Ratón', 'Navegador [' + xRelativa + ', ' + yRelativa + ']', 'Pagina [' + xAbsoluta + ', ' + yAbsoluta + ']']);
+            document.getElementById("info").style.backgroundColor = '#FFFFFF';
+        }
+
+        function keyHandler(event) {
+            let caracter = String.fromCharCode(event.keyCode);
+            let codigo = event.keyCode;
+            muestraInformacion(['Teclado', 'Carácter [' + caracter + ']', 'Código [' + codigo + ']']);
+            document.getElementById("info").style.backgroundColor = '#CCE6FF';
+        }
+
+        function mouseClickHandler() {
+            document.getElementById("info").style.backgroundColor = '#FFFFCC';
+        }
+
+        document.addEventListener('mousemove', mouseHandler);
+        document.addEventListener('keypress', keyHandler);
+        document.addEventListener('click', mouseClickHandler);
+    </script>
+</head>
+<body>
+<div id="info"></div>
+</body>
+</html>
+
+
